@@ -1,2 +1,2 @@
-import CardForm from ".CardForm.jsx";
+import CardForm from "./CardForm.jsx";
 export default CardForm;

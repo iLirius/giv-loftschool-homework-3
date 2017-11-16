@@ -12,7 +12,7 @@ class App extends Component {
     email: "",
     cardNumber: "",
     isTimeOver: false,
-    stepTitles: ["Personal information", "Card information", "Finish"]
+    stepTitles: ["Personal information", "Card information", "Finish"],
   };
   handleTabClick = number => {
     this.setState({ step: number });
@@ -26,26 +26,18 @@ class App extends Component {
   handleChangeTimeOver = isTimeOver => {
     isTimeOver && this.setState({ isTimeOver: !this.state.isTimeOver });
   };
+
   isFormCommitable = () => {
     const { step, firstName, lastName, email, cardNumber } = this.state;
     let result = false;
 
-    if (step === 1) {
-      if (
-        firstName !== "" &&
-        lastName !== "" &&
-        email !== "" &&
-        email.includes("@")
-      ) {
-        result = true;
-      }
+    if (
+      (step === 1 && firstName && lastName && email && email.includes("@")) ||
+      (step === 2 && cardNumber.length === 16)
+    ) {
+      result = true;
     }
 
-    if (step === 2) {
-      if (cardNumber.length === 16) {
-        result = true;
-      }
-    }
     return result;
   };
   renderForm = () => {
@@ -68,68 +60,17 @@ class App extends Component {
     );
   };
 
-  getIsClickAndSelected = () => {
-    const { step } = this.state;
-    let result = [
-      {
-        isClickable: false,
-        isSelected: true
-      },
-      {
-        isClickable: false,
-        isSelected: false
-      },
-      {
-        isClickable: false,
-        isSelected: false
-      }
-    ];
-    if (step === 2) {
-      result = [
-        {
-          isClickable: true,
-          isSelected: false
-        },
-        {
-          isClickable: false,
-          isSelected: true
-        },
-        {
-          isClickable: false,
-          isSelected: false
-        }
-      ];
-    }
-    if (step === 3) {
-      result = [
-        {
-          isClickable: true,
-          isSelected: false
-        },
-        {
-          isClickable: true,
-          isSelected: false
-        },
-        {
-          isClickable: false,
-          isSelected: true
-        }
-      ];
-    }
-    return result;
-  };
-
   render() {
-    const { isTimeOver, stepTitles } = this.state;
-    const result = this.getIsClickAndSelected();
+    const { step, isTimeOver, stepTitles } = this.state;
+
     return (
       <div className="container">
         <div className="tab-panel">
           {stepTitles.map((title, index) => {
             return (
               <Step
-                isClickable={result[index].isClickable}
-                isSelected={result[index].isSelected}
+                isClickable={step > index + 1}
+                isSelected={step === index + 1}
                 key={title}
                 number={index + 1}
                 onClick={this.handleTabClick}

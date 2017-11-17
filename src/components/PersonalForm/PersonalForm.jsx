@@ -9,6 +9,7 @@ export class PersonalForm extends Component {
     onChangeForm(name, value);
   };
   render() {
+    const { firstName, lastName, email } = this.props;
     return (
       <div className="personal-form">
         <Title>Персональная информация</Title>
@@ -17,18 +18,21 @@ export class PersonalForm extends Component {
           name="firstName"
           onChange={this.handleChangeForm}
           placeholder="First name"
+          value={firstName}
         />
         <input
           type="text"
           name="lastName"
           onChange={this.handleChangeForm}
           placeholder="Last name"
+          value={lastName}
         />
         <input
           type="text"
           name="email"
           onChange={this.handleChangeForm}
           placeholder="Email"
+          value={email}
         />
       </div>
     );

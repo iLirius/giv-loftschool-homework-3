@@ -24,7 +24,7 @@ class App extends Component {
     this.setState({ step: this.state.step + 1 });
   };
   handleChangeTimeOver = isTimeOver => {
-    isTimeOver && this.setState({ isTimeOver: !this.state.isTimeOver });
+    isTimeOver && this.setState({ isTimeOver: isTimeOver });
   };
 
   isFormCommitable = () => {
@@ -82,13 +82,15 @@ class App extends Component {
         </div>
         <div className="form-content">{this.renderForm()}</div>
         <div className="button-panel">
-          <button
-            className="button-next"
-            disabled={!this.isFormCommitable() || isTimeOver}
-            onClick={this.handleClickNextForm}
-          >
-            Next
-          </button>
+          {step !== 3 && (
+            <button
+              className="button-next"
+              disabled={!this.isFormCommitable() || isTimeOver}
+              onClick={this.handleClickNextForm}
+            >
+              Next
+            </button>
+          )}
         </div>
       </div>
     );

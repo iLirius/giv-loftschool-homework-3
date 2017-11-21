@@ -7,7 +7,7 @@ export class CardForm extends Component {
     super(props);
 
     this.state = {
-      leftTime: 120
+      leftTime: 12,
     };
     props.onChangeTimeOver(false);
   }
@@ -16,13 +16,16 @@ export class CardForm extends Component {
     this.id = setInterval(() => {
       const leftTime = Math.max(this.state.leftTime - 1, 0);
       this.setState({ leftTime });
-      if (leftTime === 0 && this.state.leftTime === 1) {
+
+      if (leftTime === 0 && this.state.leftTime === 0) {
         this.props.onChangeTimeOver(true);
+        clearInterval(this.id);
       }
     }, 1000);
   }
 
   componentWillUnmount() {
+    console.log("componentWillUnmount clearInterval");
     clearInterval(this.id);
   }
   handleChangeForm = event => {
@@ -41,6 +44,7 @@ export class CardForm extends Component {
           name="cardNumber"
           onChange={this.handleChangeForm}
           placeholder="0000000000000000"
+          maxLength={16}
         />
       </div>
     );

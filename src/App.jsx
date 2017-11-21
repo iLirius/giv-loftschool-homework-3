@@ -84,7 +84,7 @@ class App extends Component {
         <div className="button-panel">
           <button
             className="button-next"
-            disabled={!this.isFormCommitable() || !isTimeOver}
+            disabled={!this.isFormCommitable() || isTimeOver}
             onClick={this.handleClickNextForm}
           >
             Next

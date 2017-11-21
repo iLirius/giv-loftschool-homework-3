@@ -26,7 +26,7 @@ describe("Компонент App", () => {
 
       it("button-panel button.button-next", () => {
         expect(wrapper.find(".button-panel button.button-next")).toHaveLength(
-          1
+          1,
         );
       });
     });
@@ -47,8 +47,8 @@ describe("Компонент App", () => {
                 isClickable={false}
               >
                 Personal information
-              </Step>
-            )
+              </Step>,
+            ),
           ).toBeTruthy();
         });
 
@@ -63,8 +63,8 @@ describe("Компонент App", () => {
                 isClickable={false}
               >
                 Card information
-              </Step>
-            )
+              </Step>,
+            ),
           ).toBeTruthy();
         });
         it('Третий компонент Step должен содержать props key="Finish", onClick=App.handleTabClick, isSelected=false, number=3, isClickable=false', () => {
@@ -78,8 +78,8 @@ describe("Компонент App", () => {
                 isClickable={false}
               >
                 Finish
-              </Step>
-            )
+              </Step>,
+            ),
           ).toBeTruthy();
         });
       });
@@ -97,8 +97,8 @@ describe("Компонент App", () => {
                 isClickable
               >
                 Personal information
-              </Step>
-            )
+              </Step>,
+            ),
           ).toBeTruthy();
         });
 
@@ -113,8 +113,8 @@ describe("Компонент App", () => {
                 isClickable={false}
               >
                 Card information
-              </Step>
-            )
+              </Step>,
+            ),
           ).toBeTruthy();
         });
         it('Третий компонент Step должен содержать props key="Finish", onClick=App.handleTabClick, isSelected=false, number=3, isClickable=false', () => {
@@ -128,8 +128,8 @@ describe("Компонент App", () => {
                 isClickable={false}
               >
                 Finish
-              </Step>
-            )
+              </Step>,
+            ),
           ).toBeTruthy();
         });
       });
@@ -148,8 +148,8 @@ describe("Компонент App", () => {
                 isClickable
               >
                 Personal information
-              </Step>
-            )
+              </Step>,
+            ),
           ).toBeTruthy();
         });
         it('Второй компонент Step должен содержать props key="Card information", onClick=App.handleTabClick, isSelected=false, number=2, isClickable=true', () => {
@@ -163,8 +163,8 @@ describe("Компонент App", () => {
                 isClickable
               >
                 Card information
-              </Step>
-            )
+              </Step>,
+            ),
           ).toBeTruthy();
         });
         it('Третий компонент Step должен содержать props key="Finish", onClick=App.handleTabClick, isSelected=true, number=3, isClickable=false', () => {
@@ -178,8 +178,8 @@ describe("Компонент App", () => {
                 isClickable={false}
               >
                 Finish
-              </Step>
-            )
+              </Step>,
+            ),
           ).toBeTruthy();
         });
       });
@@ -187,11 +187,11 @@ describe("Компонент App", () => {
     describe("Кнопка button.button-next", () => {
       it(" должна быть disabled если !this.isFormCommitable() || !isTimeOver", () => {
         wrapper.setState({
-          isTimeOver: true
+          isTimeOver: true,
         });
 
         expect(
-          wrapper.find("button.button-next").props().disabled
+          wrapper.find("button.button-next").props().disabled,
         ).toBeTruthy();
       });
 
@@ -213,7 +213,7 @@ describe("Компонент App", () => {
       lastName: "",
       email: "",
       cardNumber: "",
-      isTimeOver: false
+      isTimeOver: false,
     };
     Object.keys(state).forEach(key => {
       it(`${key}: ${state[key] === "" ? "''" : state[key]}`, () => {
@@ -284,7 +284,7 @@ describe("Компонент App", () => {
             step: 1,
             lastName: "test",
             firstName: "test",
-            email: "test@"
+            email: "test@",
           });
           expect(wrapper.instance().isFormCommitable()).toBeTruthy();
         });
@@ -293,7 +293,7 @@ describe("Компонент App", () => {
             step: 1,
             lastName: "test",
             firstName: "",
-            email: "test@"
+            email: "test@",
           });
 
           expect(wrapper.instance().isFormCommitable()).toBeFalsy();
@@ -303,7 +303,7 @@ describe("Компонент App", () => {
             step: 1,
             lastName: "",
             firstName: "test",
-            email: "test@"
+            email: "test@",
           });
 
           expect(wrapper.instance().isFormCommitable()).toBeFalsy();
@@ -313,7 +313,7 @@ describe("Компонент App", () => {
             step: 1,
             lastName: "test",
             firstName: "test",
-            email: ""
+            email: "",
           });
 
           expect(wrapper.instance().isFormCommitable()).toBeFalsy();
@@ -323,7 +323,7 @@ describe("Компонент App", () => {
         it("Должен возврать  true если cardNumber.length === 16", () => {
           wrapper.setState({
             step: 2,
-            cardNumber: "1324123412341234"
+            cardNumber: "1324123412341234",
           });
           expect(wrapper.instance().isFormCommitable()).toBeTruthy();
         });
@@ -331,7 +331,7 @@ describe("Компонент App", () => {
       describe("Если state.step !== 1 | 2", () => {
         it("Должен возврать false", () => {
           wrapper.setState({
-            step: 3
+            step: 3,
           });
           expect(wrapper.instance().isFormCommitable()).toBeFalsy();
         });
@@ -349,30 +349,30 @@ describe("Компонент App", () => {
           step: 1,
           firstName: "test",
           lastName: "test",
-          email: "test@"
+          email: "test@",
         });
         expect(wrapper.instance().renderForm().props).toEqual({
           firstName: "test",
           lastName: "test",
           email: "test@",
-          onChangeForm: wrapper.instance().handleChangeForm
+          onChangeForm: wrapper.instance().handleChangeForm,
         });
       });
       it(`Если state.step === 2 возвращает компонент <CardForm cardNumber={state.cardNumber} onChangeForm={this.handleChangeForm} onChangeTimeOver={this.handleChangeTimeOver} />`, () => {
         wrapper.setState({
           step: 2,
-          cardNumber: "1234"
+          cardNumber: "1234",
         });
         expect(wrapper.instance().renderForm().props).toEqual({
           cardNumber: "1234",
           onChangeForm: wrapper.instance().handleChangeForm,
-          onChangeTimeOver: wrapper.instance().handleChangeTimeOver
+          onChangeTimeOver: wrapper.instance().handleChangeTimeOver,
         });
       });
       it(`Если state.step === 3 возвращает строку 'Поздравляем!'`, () => {
         const wrapper = shallow(<App />);
         wrapper.setState({
-          step: 3
+          step: 3,
         });
         expect(wrapper.instance().renderForm()).toEqual("Поздравляем!");
       });
